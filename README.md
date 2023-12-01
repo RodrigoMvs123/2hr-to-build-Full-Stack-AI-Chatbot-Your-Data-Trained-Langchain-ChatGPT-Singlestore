@@ -2,6 +2,8 @@
 
 https://www.youtube.com/watch?v=CSTZ7IfoCFI 
 
+https://raw.githubusercontent.com/RodrigoMvs123/2hr-to-build-Full-Stack-AI-Chatbot-Your-Data-Trained-Langchain-ChatGPT-Singlestore/main/README.md
+
 https://www.singlestore.com/ 
 
 Prompt
