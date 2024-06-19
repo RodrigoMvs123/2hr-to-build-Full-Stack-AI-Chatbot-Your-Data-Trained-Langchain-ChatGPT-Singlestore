@@ -1,4 +1,5 @@
-# 2hr-to-build-Full-Stack-AI-Chatbot-Your-Data-Trained-Langchain-ChatGPT-Singlestore
+
+## 2hr-to-build-Full-Stack-AI-Chatbot-Your-Data-Trained-Langchain-ChatGPT-Singlestore
 
 https://www.youtube.com/watch?v=CSTZ7IfoCFI 
 
@@ -6,12 +7,17 @@ https://raw.githubusercontent.com/RodrigoMvs123/2hr-to-build-Full-Stack-AI-Chatb
 
 https://github.com/RodrigoMvs123/2hr-to-build-Full-Stack-AI-Chatbot-Your-Data-Trained-Langchain-ChatGPT-Singlestore/blame/main/README.md
 
-https://www.singlestore.com/ 
 
-Prompt
+## Single Store
+- https://www.singlestore.com/ 
+
+## Prompt
+```bash
 npx create-singlestoredb-app cvs-reader
+```
 
-SingleStore UI
+## SingleStore UI
+```
 API Keys
 Create API Key
 API key name
@@ -21,11 +27,16 @@ never
 Create API key
 4756d6f52000eabc291d628eecefe1dcf1d2db49012b4cadba1e15961d675469 
 Close
+```
 
+```
 SingleStore
 Cloud
 cvs-reader-workspace-group-2
+```
 
+## Source Code
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -45,7 +56,9 @@ app.use(apiRouter)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server listening on port: ${port}`))    
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -64,8 +77,9 @@ const app = express()
 const router = express.Router()
 
 export default router
+```
 
-
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -100,7 +114,9 @@ export async function connectSingleStore(
 export async function stopSingleStore(conn: mysql.Connection) {
     await conn.end();
 }
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -123,7 +139,9 @@ const App = () => {
 }
 
 export default App
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -143,18 +161,24 @@ import { render } from 'react-dom'
 import App from './App'
 
 render(<App />, document.getElementById("root"))
+```
 
-SingleStore UI
+## SingleStore UI
+```
 Develop
 Personal
 New Notebook
 Name
 cvs-reader ( SQL )
 Create
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 !pip install matplotlib --quiet
 !pip install plotly.express --quiet
 !pip install scikit-learn --quiet
@@ -163,25 +187,35 @@ Python
 !pip install wget --quiet
 !pip install openai --quiet
 Save
+```
 
-SingleStore UI
+## SingleStore UI
+```
 cvs-reader-workspace-group-2
 Create Database
 choose a new database name
 news
 Create Database
+```
 
-SingleStore UI
+## SingleStore UI
+``` 
 Develop
 Notebook
 Personal
 cvs-reader.ipynb
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
+```
 Database
 news
+```
 Python
+```
 !pip install matplotlib --quiet
 !pip install plotly.express --quiet
 !pip install scikit-learn --quiet
@@ -190,10 +224,14 @@ Python
 !pip install wget --quiet
 !pip install openai --quiet
 Play
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 import pandas as pd
 import os
 import wget
@@ -207,30 +245,46 @@ if not os.path.exists(file_path):
     print("File downloaded successfully.")
 else:
     print("File already exists in the local file system.")
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 df = pd.read_csv('AG_news_samples.cvs')
 df.pop('label_int')
 df
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 data = df.values.tolist()
 print(data)
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 %%sql
 DROP DATABASE IF EXISTS news;
 CREATE DATABASE IF NOT EXISTS news;
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 %%sql
 DROP TABLE IF EXISTS news.news_articles;
 CREATE TABLE IF NOT EXISTS news.news_articles (
@@ -239,20 +293,29 @@ CREATE TABLE IF NOT EXISTS news.news_articles (
     label TEXT,
     embedding BLOB
 );
-
+```
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 from sqlalchemy import *
 
 db_connection = create_engine(connection_url)connect()
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 json_data = [json.dumps(row) for row in data]
+```
 
-Openai 
+## Openai UI
+``` 
 Openai api_key 
 Personal
 API Keys
@@ -261,22 +324,34 @@ name
 demo
 Create secret key
 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
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 import openai
 openai.api_key = "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"
 embedded_data = openai.Embedding.create(input=json_data, model="text-embedding-ada-002")['data']
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
 combined_data = [tuple(row) + (embedded['embedding'],) for embedded, row in zip(embedded_data, data)]
+```
 
 cvs-reader
+```
 singlestore-cvs-workspace-1
+```
 Python
+```
     %sql TRUNCATE TABLE news.news_article;
 
     statement = '''
@@ -301,13 +376,19 @@ Python
             db_connection.exec_driver_sql(statement, values)
         except Exception as e:
             print("Error inserting row {}: {}".format(i, e))
+```
 
-SingleStore UI
+## SingleStore UI
+```
 Cloud 
 Database
 news
 Indexes
 Sample Data
+```
+
+## Source Code
+```typescript
 
 Visual Studio Code
 Explorer 
@@ -334,9 +415,11 @@ body {
     height: 100vh;
     font-family: Arial, sans-serif;
 }
+```
 
 localhost:3000
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -383,9 +466,12 @@ const App = () => {
 }
 
 export default App
+```
 
 https://compart.com/en/unicode/U+21E8
 
+## Source Code
+```scss
 Visual Studio Code
 Explorer 
 Open Editors
@@ -427,7 +513,9 @@ body {
     height: 100%;
     border-radius: 30px 20px 20px 30px;
 }
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -449,7 +537,9 @@ import App from './App'
 import './app.scss'
 
 render(<App />, document.getElementById("root"))
+```
 
+```scss
 Visual Studio Code
 Explorer 
 Open Editors
@@ -588,17 +678,24 @@ body {
         }
     }
 }
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 npm i openai
+```
 
-SingleStore UI
+## SingleStore UI
+```
 Develop
 Personal
 cvs-readeripynb
 openai.api_key = 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
+```
 
+## Source Code
+```
 Visual Studio Code
 Explorer 
 Open Editors
@@ -617,7 +714,9 @@ server.ts
 .evn
 OPENAI_API_KEY="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
 "
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -652,14 +751,20 @@ router.get("/api/database/:text", async (req, resp) => {
 })
 
 export default router
+```
 
 localhost:3000/api/database/hello
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 Server listening on port: 3000
-hello
 
+hello
+```
+
+## Source Code
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -740,11 +845,16 @@ const App = () => {
 }
 
 export default App
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 npm run dev 
+```
 
+## Source Code
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -790,7 +900,9 @@ router.get("/api/database/:text", async (req, resp) => {
 })
 
 export default router
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -859,7 +971,9 @@ export async function findNewsArticle({
         return error 
     }
 }
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -916,7 +1030,9 @@ router.get("/api/database/:text", async (req, resp) => {
 })
 
 export default router
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -1009,7 +1125,9 @@ const App = () => {
 }
 
 export default App
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -1036,7 +1154,9 @@ const HomePageIcon = () => {
 }
 
 export default HomePageIcon
+```
 
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -1069,14 +1189,21 @@ const ChatIcon = () => {
 }
 
 export default ChatIcon
+```
 
-https://www.svgviewer.dev/ 
+## SvgViewer
+- https://www.svgviewer.dev/ 
+```
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 124 124" fill="none">
 <rect width="124" height="124" rx="24" fill="#F97316"/>
 <path d="M19.375 36.7818V100.625C19.375 102.834 21.1659 104.625 23.375 104.625H87.2181C90.7818 104.625 92.5664 100.316 90.0466 97.7966L26.2034 33.9534C23.6836 31.4336 19.375 33.2182 19.375 36.7818Z" fill="white"/>
 <circle cx="63.2109" cy="37.5391" r="18.1641" fill="black"/>
 <rect opacity="0.4" x="81.1328" y="80.7198" width="17.5687" height="17.3876" rx="4" transform="rotate(-45 81.1328 80.7198)" fill="#FDBA74"/>
 </svg>
+```
+
+## Source Code
+```typescript
 
 Visual Studio Code
 Explorer 
@@ -1111,14 +1238,20 @@ const LogOutIcon = () => {
 }
 
 export default LogOutIcon
+```
 
+## SvgViewer
 https://www.svgviewer.dev/s/359488/logout 
+```
 	<?xml version="1.0" encoding="utf-8"?>
             <!-- License: MIT. Made by Software Mansion:       https://github.com/kamilagraf/react-swm-icon-pack -->
             <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none"  xmlns="http://www.w3.org/2000/svg">
             <path d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18  20H15M8 8L4 12M4 12L8 16M4 12L16 12" stroke="#000000" stroke-width="1.5"  stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+```
 
+## Source Code
+```typescript
 Visual Studio Code
 Explorer 
 Open Editors
@@ -1218,8 +1351,9 @@ const App = () => {
 }
 
 export default App
+```
 
-
+```scss
 Visual Studio Code
 Explorer 
 Open Editors
@@ -1368,6 +1502,5 @@ body {
         }
     }
 }
-
-
+```
 
