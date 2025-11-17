@@ -25,7 +25,6 @@ demo
 Expiration
 never
 Create API key
-4756d6f52000eabc291d628eecefe1dcf1d2db49012b4cadba1e15961d675469 
 Close
 ```
 
@@ -323,7 +322,6 @@ Create new secret key
 name 
 demo
 Create secret key
-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
 ```
 
 cvs-reader
@@ -333,7 +331,7 @@ singlestore-cvs-workspace-1
 Python
 ```
 import openai
-openai.api_key = "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"
+openai.api_key = 
 embedded_data = openai.Embedding.create(input=json_data, model="text-embedding-ada-002")['data']
 ```
 
@@ -691,7 +689,7 @@ npm i openai
 Develop
 Personal
 cvs-readeripynb
-openai.api_key = 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
+openai.api_key = 
 ```
 
 ## Source Code
@@ -712,8 +710,7 @@ server.ts
 .env
 
 .evn
-OPENAI_API_KEY="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
-"
+OPENAI_API_KEY=
 ```
 
 ```typescript
